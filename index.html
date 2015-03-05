@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AngularJS Instagram Searcher</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -15,8 +16,19 @@
 
 <body>
   <section class="container" ng-app="myApp">
-    <article class="row">
-
+    <article ng-controller="searcherCtrl" class="row">
+      <div class="logo col-sm-12">
+        <img class="img-responsive center-block" src="img/ng-instagram.png" alt="logo">
+      </div>
+      <form ng-submit="search()" class="searchBox form-inline text-center col-sm-12">
+        <div class="form-group">
+          <label class="sr-only" for="searchBox">Keyword</label>
+          <input type="text" ng-model="keyword" class="form-control" id="searchBox" placeholder="Enter a tag to search">
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </form>
+      <div class="validations"></div>
+      <div class="results"></div>
     </article>
   </section>
 </body>
