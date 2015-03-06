@@ -21,22 +21,25 @@
       <div class="logo col-sm-12">
         <img class="img-responsive center-block" src="img/ng-instagram.png" alt="logo">
       </div>
-      <form ng-submit="search()" class="searchBox form-inline text-center col-sm-12" novalidate>
+      <form name="searchForm" ng-submit="search()" class="searchBox form-inline text-center col-sm-12" novalidate>
         <div class="form-group">
-          <input type="text" name="searchBox" ng-pattern="/(^[A-Za-z])\w{2,}/g" ng-model="input.keyword" class="form-control" id="searchBox" placeholder="Enter a tag to search" required>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <input type="text" name="searchBox" ng-minlength="3" ng-model="keyword" ng-pattern="/(^[A-Za-z])\w{2,}/" class="form-control" id="searchBox" placeholder="Enter a tag to search" required>
+          <input type="submit" ng-disabled="searchForm.$pristine || searchForm.searchBox.$dirty && searchForm.searchBox.$invalid" class="btn btn-default">
+        </div>
+        <div class="validations" ng-messages="searchForm.searchbox.$error" style="color:maroon">
+          <p ng-message="required">You did not enter a field</p>
+          <p ng-message="minlength">Your field is too short</p>
+          <p ng-message="pattern">Enter only one keyword</p>
         </div>
       </form>
-      <div class="validations">
-        <!--Insert Validations here-->
-      </div>
       <div class="ajaxStatus text-center col-sm-12">
         <p ng-if="searchingActive">Searching Instagram for photos tagged with "{{search.keyword}}"</p>
-        <p ng-if="searchingComplete">We found {{search.number}} results for "{{search.keyword}}"</p>
-        <p ng-if="searchingFailed">Sorry, no images could be found. Try a different keyword.</p>
+        <p ng-if="searchingComplete">We found {{search.count | number}} results for "{{search.keyword}}"</p>
+        <p ng-if="searchingFailed">Sorry, no images could be found. Please try a different keyword.</p>
       </div>
-      <div class="results col-sm-4" ng-repeat="image in images">
-        <img class="img-responsive img-thumbnail" ng-src="{{image.images.standard_resolution.url}}" alt="{{image.tags[0]}}">
+      <div ng-if="searchingComplete" class="results col-sm-4" ng-repeat="image in images">
+        <a href="{{image.link}}"><img class="img-responsive img-thumbnail" ng-src="{{image.images.low_resolution.url}}" alt="{{image.tags[0]}}">
+        </a>
         <!--animate these divs with stagger as they populate-->
       </div>
     </article>
