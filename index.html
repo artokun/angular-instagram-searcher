@@ -36,8 +36,9 @@
         <p ng-if="searchingActive">Searching Instagram for photos tagged with "{{search.keyword}}"</p>
         <p ng-if="searchingComplete">We found {{search.count | number}} results for "{{search.keyword}}"</p>
         <p ng-if="searchingFailed">Sorry, no images could be found. Please try a different keyword.</p>
+        <p ng-if="searchingFailed2">Sorry, there was a communication error with Instagram. Please try again later. ({{error}})</p>
       </div>
-      <div ng-if="searchingComplete" class="results col-sm-4" ng-repeat="image in images">
+      <div ng-if="searchingComplete" class="results col-sm-4 col-md-3 text-center" ng-repeat="image in images">
         <a href="{{image.link}}"><img class="img-responsive img-thumbnail" ng-src="{{image.images.low_resolution.url}}" alt="{{image.tags[0]}}">
         </a>
         <!--animate these divs with stagger as they populate-->

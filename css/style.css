@@ -1,9 +1,45 @@
-
 .searchBox {
-  margin-left:-10px;
+  margin-left: -10px;
   margin-top: 20px;
 }
 
 .ajaxStatus {
   margin: 20px 0;
+}
+
+.results {
+  -webkit-transition: 1s linear all;
+  transition: 1s linear all;
+  margin-bottom: 30px;
+}
+
+.results.ng-move,
+.results.ng-enter,
+.results.ng-leave {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+
+.results.ng-leave.ng-leave-active,
+.results.ng-move,
+.results.ng-enter {
+  opacity: 0;
+}
+
+.results.ng-leave,
+.results.ng-move.ng-move-active,
+.results.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.results.ng-enter-stagger {
+  /* this will have a 100ms delay between each successive enter animation */
+  
+  -webkit-transition-delay: .2s;
+  transition-delay: .2s;
+  /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+  
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
 }

@@ -13,16 +13,20 @@ angular.module('myApp', ['ngMessages', 'ngAnimate'])
       $http(params)
         .success(function (response) {
           $scope.images = response.data;
-          $scope.searchingComplete = true;
           $scope.search.keyword = $scope.keyword;
-          $scope.search.count = $scope.images.length;
+          if ($scope.images.length == 0 ) {
+            $scope.searchingFailed = true;
+          } else {
+            $scope.search.count = $scope.images.length;
+            $scope.searchingComplete = true;
+          }
           $scope.keyword = null;
           $scope.searchForm.$setPristine();
         })
         .error(function (error) {
           $scope.searchingComplete = false;
-          $scope.searchingFailed = true;
-          alert(error.meta.code);
+          $scope.searchingFailed2 = true;
+          $scope.error = error.meta.code;
           //need to flesh this one out
         });
     };
