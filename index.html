@@ -41,6 +41,7 @@
       <div ng-if="searchingComplete" class="results col-sm-4 col-md-3 text-center" ng-repeat="image in images">
         <a href="{{image.link}}"><img class="img-responsive img-thumbnail" ng-src="{{image.images.low_resolution.url}}" alt="{{image.tags[0]}}">
         </a>
+        <p>Likes: {{image.likes.count}}</p>
         <!--animate these divs with stagger as they populate-->
       </div>
     </article>
